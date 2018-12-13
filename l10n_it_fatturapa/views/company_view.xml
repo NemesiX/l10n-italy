@@ -17,10 +17,6 @@
                                 <field name="fatturapa_fiscal_position_id" required="1" class="oe_inline"/>
                             </div>
                             <div>
-                                <label for="fatturapa_format_id"/>
-                                <field name="fatturapa_format_id" required="1" class="oe_inline"/>
-                            </div>
-                            <div>
                                 <label for="fatturapa_sequence_id"/>
                                 <field name="fatturapa_sequence_id" required="1" class="oe_inline"/>
                             </div>
@@ -31,6 +27,10 @@
                             <div>
                                 <label for="fatturapa_tax_representative"/>
                                 <field name="fatturapa_tax_representative" class="oe_inline"/>
+                            </div>
+                            <div>
+                                <label for="fatturapa_stabile_organizzazione"/>
+                                <field name="fatturapa_stabile_organizzazione" class="oe_inline"/>
                             </div>
                             <div>
                                 <label for="fatturapa_sender_partner"/>
@@ -61,6 +61,5 @@
                 </xpath>
             </field>
         </record>
-
 	</data>
 </openerp>

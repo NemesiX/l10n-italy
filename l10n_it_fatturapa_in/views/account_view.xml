@@ -74,6 +74,7 @@
 	        <field name="arch" type="xml">
 	            <search>
 	                <field name="name"></field>
+                    <field name="xml_supplier_id"/>
 	                <filter name="to_register" string="To Register" domain="[('registered','=',False)]"/>
 	            </search>
 	        </field>
@@ -274,7 +275,7 @@
                                         <tree editable="bottom" string="Summary Data">
                                             <field name="tax_rate"></field>
                                             <field name="non_taxable_nature"></field>
-                                            <field name="incidental charges" readonly="1"></field>
+                                            <field name="incidental_charges" readonly="1"></field>
                                             <field name="rounding"></field>
                                             <field name="amount_untaxed"></field>
                                             <field name="amount_tax"></field>
@@ -344,7 +345,8 @@
                                     <field name="welfare_fund_ids" nolabel="1" readonly="1">
                                         <tree editable="bottom" string="Welfare Fund Details">
                                             <field name="name"></field>
-                                            <field name="fund_nature"></field>
+                                            <field name="kind_id"></field>
+                                            <field name="fund_nature" readonly="1"></field>
                                             <field name="welfare_rate_tax" readonly="1"></field>
                                             <field name="welfare_amount_tax"></field>
                                             <field name="welfare_Iva_tax"></field>
@@ -354,7 +356,14 @@
                                         </tree>
                                     </field>
                                 </group>
-                                 
+			                    <group string="Withholding">
+			                        <field name="ftpa_withholding_ids" nolabel="1" readonly="1">
+			                            <tree editable="bottom" string="Withholding Details">
+			                                <field name="name"/>
+			                                <field name="amount"/>
+			                            </tree>
+			                        </field>
+			                    </group>
 			                    <group string="Payments">
 			                        <field name="fatturapa_payments" nolabel="1" readonly="1">
 			                            <tree string="Payments">

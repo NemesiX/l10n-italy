@@ -15,6 +15,7 @@
         <% setLang(picking.partner_id.lang) %>
         <div class="address">
             <table class="recipient">
+	<tr><td class="address_title">${_("Luogo di Destinazione:")}</td></tr>
                 %if picking.partner_id.parent_id:
                 <tr><td class="name">${picking.partner_id.parent_id.name or ''}</td></tr>
                 <tr><td>${picking.partner_id.title and picking.partner_id.title.name or ''} ${picking.partner_id.name }</td></tr>
@@ -33,21 +34,33 @@
             invoice_addr = invoice_address(picking)
             %>
             <table class="invoice">
-                <tr><td class="address_title">${_("Invoice address:")}</td></tr>
-                <tr><td>${invoice_addr.title and invoice_addr.title.name or ''} ${invoice_addr.name }</td></tr>
-                %if invoice_addr.contact_address:
+                <tr><td class="address_title">${_("Destinatario:")}</td></tr>
+                
+	%if invoice_addr.parent_id.contact_address:
+		<tr><td>${invoice_addr.title and invoice_addr.title.name or ''} ${invoice_addr.parent_id.name } </td></tr>
+                    <% address_lines = invoice_addr.parent_id.contact_address.split("\n") %>
+                    %for part in address_lines:
+                        %if part:
+                        <tr><td>${part}</td></tr>
+                        %endif
+                    %endfor
+	%else:
+	    %if invoice_addr.contact_address:
+		<tr><td>${invoice_addr.title and invoice_addr.title.name or ''} ${invoice_addr.name } </td></tr>
                     <% address_lines = invoice_addr.contact_address.split("\n") %>
                     %for part in address_lines:
                         %if part:
                         <tr><td>${part}</td></tr>
                         %endif
                     %endfor
-                %endif
+	    %endif
+	%endif
+	<tr><td>${_("P.IVA: ")} ${invoice_addr.vat or ''} </td></tr>
             </table>
         </div>
-        
+
         <h1 style="clear:both;">DDT n.:  ${picking.ddt_number or ''}</h1>
-        
+
         <table class="basic_table" width="100%">
             <tr>
                 <td style="font-weight:bold;">${_('Contact')}</td>
@@ -61,7 +74,7 @@
                 <td>${picking.origin or ''}</td>
                 <td>${formatLang(picking.ddt_date, date=True)}</td>
                 <td>${picking.weight}</td>
-                <td>${picking.number_of_packages}</td>                 
+                <td>${picking.number_of_packages}</td>
             </tr>
         </table>
          <br />
@@ -99,23 +112,27 @@
                 </tr>
             %endfor
         </table>
-        
+
         <br/>
         %if picking.note :
+        <tr><td class="note_text">${_("Annotazioni:")}</td></tr>
             <p class="std_text">${picking.note | carriage_returns}</p>
         %endif
     <br/><br/><br/><br/>
      <table class="basic_table" width="100%">
             <tr>
                 <td style="font-weight:bold;">Data Ritiro</td>
-                <td style="font-weight:bold;">Firma</td>
+	<td style="font-weight:bold;">Ora Ritiro</td>
+                <td style="font-weight:bold;">Firma Conducente</td>
+	<td style="font-weight:bold;">Firma Destinatario</td>
             </tr>
             <tr>
                 <td><br /></td>
+	<td><br /></td>
                 <td><br /><br /></td>
+	<td><br /><br /></td>
             </tr>
         </table>
-         <p style="page-break-after: always"/>
     %endfor
 </body>
 </html>

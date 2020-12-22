@@ -24,41 +24,6 @@ from openerp.tools.translate import _
 
 class AccountTax(orm.Model):
     _inherit = 'account.tax'
-    _columns = {
-        'non_taxable_nature': fields.selection([
-            ('N1', 'Escluse ex art. 15'),
-            ('N2', 'Non soggette'),
-            ('N3', 'Non imponibili'),
-            ('N4', 'Esenti'),
-            ('N5', 'Regime del margine / IVA non esposta in fattura'),
-            ('N6', 'Inversione contabile'),
-            ('N7', 'IVA assolta in altro stato UE'),
-            ('N2.1', 'non soggette ad IVA ai sensi degli artt. da 7 a 7-septies del DPR 633/72'),
-            ('N2.2', 'non soggette – altri casi'),
-            ('N3.1', 'non imponibili – esportazioni'),
-            ('N3.2', 'non imponibili – cessioni intracomunitarie'),
-            ('N3.3', 'non imponibili – cessioni verso San Marino'),
-            ('N3.4', 'non imponibili – operazioni assimilate alle cessioni all’esportazione'),
-            ('N3.5', 'non imponibili – a seguito di dichiarazioni d’intento'),
-            ('N3.6', 'non imponibili – altre operazioni che non concorrono alla formazione del plafond'),
-            ('N6.1', 'inversione contabile – cessione di rottami e altri materiali di recupero'),
-            ('N6.2', 'inversione contabile – cessione di oro e argento puro'),
-            ('N6.3', 'inversione contabile – subappalto nel settore edile'),
-            ('N6.4', 'inversione contabile – cessione di fabbricati'),
-            ('N6.5', 'inversione contabile – cessione di telefoni cellulari'),
-            ('N6.6', 'inversione contabile – cessione di prodotti elettronici'),
-            ('N6.7', 'inversione contabile – prestazioni comparto edile e settori connessi'),
-            ('N6.8', 'inversione contabile – operazioni settore energetico'),
-            ('N6.9', 'inversione contabile – altri casi'),
-            ], string="Non taxable nature"),
-        'payability': fields.selection([
-            ('I', 'Immediate payability'),
-            ('D', 'Deferred payability'),
-            ('S', 'Split payment'),
-            ], string="VAT payability"),
-        'law_reference': fields.char(
-            'Law reference', size=128),
-    }
 
     def get_tax_by_invoice_tax(self, cr, uid, invoice_tax, context=None):
         if ' - ' in invoice_tax:

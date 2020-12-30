@@ -53,7 +53,9 @@
             </field>
             <field name="electronic_invoice_obliged_subject" position="attributes">
             	<attribute name="on_change">onchange_e_inv_obliged_subject(electronic_invoice_obliged_subject, country_id)</attribute>
-            </field> 
+            </field>
+            <!--
+            Modifica fatta da NX
             <xpath expr="//div[@name='div_address']/../../.." position="after">
                 <group string="E-invoicing" name="e_invoice_info" groups="account.group_account_invoice"
                         attrs="{'invisible': ['|', ('type', '=', 'contact'), '|', ('parent.electronic_invoice_subjected', '=', False), ('parent.electronic_invoice_obliged_subject', '=', False)]}">
@@ -68,7 +70,8 @@
                         <field name="eori_code"/>
                     </group>
                 </group>
-            </xpath>   
+            </xpath>
+            -->
         </field>
     </record>
 
